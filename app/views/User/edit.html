@@ -1,0 +1,124 @@
+{{set . "title" "User - Detail"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet" />
+<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" /> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.16/css/bootstrap-select.min.css" rel="stylesheet" />
+
+<!-- PAGE LEVEL PLUGINS-->
+<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.16/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+
+<script>
+    $(function() {
+        $('.summernote').summernote();
+        $('.summernote_air').summernote({
+            airMode: true
+        });
+    });
+    </script>
+
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        
+        {{template "side_menu.html" .}}
+            
+            {{ $roles:= .roles}}
+            <div class="content-wrapper">
+                {{template "flash.html" .}}
+                <!-- START PAGE CONTENT-->
+                {{with .user}}
+                {{ $role_id:= .Role.ID}}
+                <div class="page-heading">
+                    {{if eq .ID 0}}
+                        <h1 class="page-title">New User</h1>
+                    {{else}}
+                        <h1 class="page-title">Edit User</h1>
+                    {{end}}
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/dashboard"><i class="la la-home font-20"></i></a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="page-content fade-in-up">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ibox">
+                                <div class="ibox-head">
+                                    <div class="ibox-title">Details</div>
+                                    <div class="ibox-tools">
+                                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item">option 1</a>
+                                            <a class="dropdown-item">option 2</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ibox-body">
+                                    <form action="{{url "User.Edit" .ID}}" method="POST">
+                                        <input type="hidden" name="user.ID" value="{{.ID}}">
+                                        <div class="row">
+                                            <div class="col-sm-6 form-group">
+                                                <label>Name</label>
+                                                <input class="form-control" type="text" placeholder="First Name" name="user.Name" value="{{.Name}}">
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <label>Last Name</label>
+                                                <input class="form-control" type="text" placeholder="Last Name" name="user.LastName" value="{{.LastName}}">
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <label>Email</label>
+                                                <input class="form-control" type="text" placeholder="Email" name="user.Email" value="{{.Email}}" {{if ne .ID 0}}readonly="true"{{end}}>
+                                            </div>
+                                            {{if eq .ID 0}}
+                                                <div class="col-sm-6 form-group">
+                                                    <label>Password</label>
+                                                    <input class="form-control" type="password" placeholder="Password" name="password">
+                                                </div>
+                                                <div class="col-sm-6 form-group">
+                                                    <label>Confirm Password</label>
+                                                    <input class="form-control" type="password" placeholder="Confirm Password" name="confirm_password">
+                                                </div>
+                                            {{end}}
+                                            <div class="col-sm-6 form-group bootstrap-select-wrapper">
+                                                <label>Role</label>
+                                                <select class="form-control" title="Select an option" name="user.Role.ID">
+                                                {{range $element := $roles}}
+                                                    <option value="{{.ID}}" data-content="<input type='hidden'><span class='select-pill'><span class='select-pill-text'>{{.Description}}</span></span>" {{if eq .ID $role_id}}selected{{end}}></option>
+                                                {{end}}
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <label>Status</label>
+                                                <select class="form-control" name="user.Active">
+                                                    <option value="TRUE"  {{if eq .Active "TRUE"}}selected{{end}}>Active</option>
+                                                    <option value="FALSE" {{if eq .Active "FALSE"}}selected{{end}}>Deactivated</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-info" type="submit">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{end}}
+        <!-- END PAGE CONTENT-->
+ 
+   <script type="text/javascript">
+        $(document).ready(function() {
+            $(function () {
+                $('select').selectpicker();
+            });
+        });
+    </script>
+{{template "footer.html" .}}

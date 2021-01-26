@@ -1,0 +1,86 @@
+# Routes Config
+#
+# This file defines all application routes (Higher priority routes first)
+#
+
+module:testrunner
+# module:jobs
+
+# General Routes of GIN
+GET     /                                       App.Index
+POST    /login                                  App.Login
+GET     /logout                                 App.Logout
+GET     /dashboard                              Dashboard.Dashboard
+
+# Entity Routes
+GET     /entity                                 Entity.Index
+GET     /entity/:ID/view                        Entity.View
+GET     /entity/:ID/edit                        Entity.Edit
+POST    /entity/:ID/edit                        Entity.SaveEntity
+GET     /entity/:ID/nodes                       Entity.Nodes
+POST    /entity/:ID/node                        Entity.AddNode
+GET     /entity/:ID/deleteNode                  Entity.DeleteNode
+GET     /entity/:ID/delete                      Entity.Delete
+GET     /entity/all                             Entity.All
+POST    /entity/search                          Entity.SearchEntity
+GET     /entity/search                          Entity.Search
+
+# Entity Instance Routes
+GET     /instance/:ID/dashboard                 Instance.Dashboard
+GET     /instance/:ID/:entityID/edit            Instance.Edit
+POST    /instance/edit                          Instance.Save
+GET     /instance/:ID/list                      Instance.List
+POST    /instance/:ID/list                      Instance.List
+GET     /instance/:ID/delete                    Instance.Delete
+
+#User Routes
+GET     /user/dashboard                         User.Dashboard
+GET     /user/list                              User.List
+POST    /user/list                              User.List
+GET     /user/:ID/edit                          User.Edit
+POST    /user/:ID/edit                          User.Save
+GET     /user/:ID/delete                        User.Delete
+
+#Role Routes
+GET     /role/list                              Role.List
+GET     /role/:ID/delete                        Role.Delete
+POST    /role/new                               Role.New
+
+#Plugins
+GET     /plugin/index                           Plugin.Index
+POST    /plugin/upload                          Plugin.Upload
+GET     /plugin/:ID/initRoutes                  Plugin.InitRoutes
+GET     /plugin/:ID/uninstall                   Plugin.Uninstall
+
+#Notifications
+GET     /notification/list                      Notification.List
+GET     /notification/:ID/delete                Notification.Delete
+GET     /notification/:userID/all               Notification.All
+POST    /notification/edit                      Notification.Save
+GET     /notification/edit                      Notification.Edit
+GET     /notification/:ID/view                  Notification.View
+
+#Relations
+GET     /relation/:entityID/list                Relation.List
+POST    /relation/:ID/add                       Relation.Add
+GET     /relation/:ID/delete                    Relation.Delete
+POST     /relation/search                       Relation.Search
+
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/*filepath                       Static.Serve("public")
+
+# Catch all, this will route any request into the controller path
+#
+#                    **** WARNING ****
+# Enabling this exposes any controller and function to the web.
+# ** This is a serious security issue if used online **
+#
+# For rapid development uncomment the following to add new controller.action endpoints
+# without having to add them to the routes table.
+# *       /:controller/:action                    :controller.:action
+
+## PLUGIN ROUTES AUTO CONFIG ##

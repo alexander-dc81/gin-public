@@ -1,0 +1,85 @@
+{{set . "title" "Entity - Detail"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/css/bootstrap-markdown.min.css" rel="stylesheet" />
+
+<!-- PAGE LEVEL PLUGINS-->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/js/bootstrap-markdown.min.js"></script>
+
+<script>
+    $(function() {
+        $('.summernote').summernote();
+        $('.summernote_air').summernote({
+            airMode: true
+        });
+    });
+    </script>
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        {{template "side_menu.html" .}}
+        {{with .entity}}
+            <div class="content-wrapper">
+                <!-- START PAGE CONTENT-->
+                <div class="page-heading">
+                    <h1 class="page-title">{{.Name}}</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html"><i class="la la-home font-20"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">Edit Entity</li>
+                    </ol>
+                </div>
+                <div class="page-content fade-in-up">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ibox">
+                                <div class="ibox-head">
+                                    <div class="ibox-title">Details</div>
+                                    <div class="ibox-tools">
+                                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item">option 1</a>
+                                            <a class="dropdown-item">option 2</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ibox-body">
+                                    <form action="{{url "Entity.Edit" .ID}}" method="POST">
+                                        <input type="hidden" id="entity.ID" name="entity.ID" value="{{.ID}}">
+                                        <div class="row">
+                                            <div class="col-sm-6 form-group">
+                                                <label>Name</label>
+                                                <input class="form-control" type="text" placeholder="name" id="entity.Name" name="entity.Name" value="{{.Name}}">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 form-group">
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <textarea id="entity.Description" name="entity.Description" class="summernote">
+                                                        {{.Description}}
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-info" type="submit">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {{end}}
+    <!-- END PAGE CONTENT-->
+   
+{{template "footer.html" .}}

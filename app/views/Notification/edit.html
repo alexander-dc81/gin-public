@@ -1,0 +1,81 @@
+{{set . "title" "Notification - New"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/css/bootstrap-markdown.min.css" rel="stylesheet" />
+
+<!-- PAGE LEVEL PLUGINS-->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/js/bootstrap-markdown.min.js"></script>
+
+<script>
+    $(function() {
+        $('.summernote').summernote();
+        $('.summernote_air').summernote({
+            airMode: true
+        });
+    });
+    </script>
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        {{template "side_menu.html" .}}
+            <div class="content-wrapper">
+                <!-- START PAGE CONTENT-->
+                <div class="page-heading">
+                    <h1 class="page-title">New Notification</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html"><i class="la la-home font-20"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">Notifications</li>
+                    </ol>
+                </div>
+                <div class="page-content fade-in-up">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ibox">
+                                <div class="ibox-head">
+                                    <div class="ibox-title">Details</div>
+                                </div>
+                                <div class="ibox-body">
+                                    <form action="{{url "Notification.Save" }}" method="POST">
+                                        <input type="hidden" name="notification.Viewed" value="false">
+                                        <div class="row">
+                                            <div class="col-sm-6 form-group">
+                                                <label>Subject</label>
+                                                <input class="form-control" type="text" placeholder="Subject" name="notification.Subject" value="">
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <label>Role</label>
+                                                <select class="form-control" name="notification.Role.ID">
+                                                {{range .roles}}
+                                                        <option value="{{.ID}}" >{{.Description}}</option>
+                                                {{end}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 form-group">
+                                                <div class="form-group">
+                                                    <label>Text</label>
+                                                    <textarea name="notification.Text" class="summernote" ></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-info" type="submit">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    <!-- END PAGE CONTENT-->
+   
+{{template "footer.html" .}}

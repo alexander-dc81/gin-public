@@ -1,0 +1,114 @@
+{{set . "title" "Entity - Attributes"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        {{template "side_menu.html" .}}
+        <div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+            <div class="page-heading">
+                <h1 class="page-title">Entity Attributes</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html"><i class="la la-home font-20"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Attributes List</li>
+                </ol>
+            </div>
+            <div class="page-content fade-in-up">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title"></div>
+                                <div class="ibox-tools">
+                                    <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#attributesModal">Add Attribute</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ibox-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th width="50px"></th>
+                                                <th>Name</th>
+                                                <th>Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{if .nodes}}
+                                            <input type="hidden" value="{{.ID}}" id="entityID" name="entityID">
+                                            {{range .nodes}}
+                                            <tr>
+                                                <td>
+                                                    <label class="ui-checkbox">
+                                                        <input type="checkbox">
+                                                        <span class="input-span"></span>
+                                                    </label>
+                                                </td>
+                                                <td>{{.Name}}</td>
+                                                <td>{{.Type.Name}}</td>
+                                                <td>
+                                                    <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
+                                                    <a href="{{url "Entity.DeleteNode" .ID $.ID}}">
+                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete" ><i class="fa fa-trash font-14"></i></button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {{end}}
+                                            {{end}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Attribute</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{url "Entity.AddNode" .ID}}" method="POST">
+                <div class="row">
+                    <div class="col-sm-6 form-group" >
+                        <label>Name</label>
+                        <input class="form-control" type="text" placeholder="name" id="node.Name" name="node.Name">
+                    </div>
+                    <div class="col-sm-6 form-group" class="form-control">
+                        <label>Type</label>
+                        <select name="node.TypeID" id="node.TypeID" class="form-control">            
+                            {{range $t := .types}}
+                              <option value="{{$t.ID}}">{{$t.Name}}</option>                                       
+                            {{end}}   
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{template "footer.html" .}}

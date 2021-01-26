@@ -1,0 +1,61 @@
+CREATE DATABASE  IF NOT EXISTS `gin` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+USE `gin`;
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+--
+-- Host: localhost    Database: gin
+-- ------------------------------------------------------
+-- Server version	8.0.15
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `entity_instance`
+--
+
+DROP TABLE IF EXISTS `entity_instance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `entity_instance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `entity_id` int(11) NOT NULL,
+  `uuid` varchar(36) COLLATE utf8mb4_bin NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `uuid_UNIQUE` (`uuid`),
+  KEY `entity_instance_entity_idx` (`entity_id`),
+  CONSTRAINT `entity_instance_entity` FOREIGN KEY (`entity_id`) REFERENCES `entity` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entity_instance`
+--
+
+LOCK TABLES `entity_instance` WRITE;
+/*!40000 ALTER TABLE `entity_instance` DISABLE KEYS */;
+INSERT INTO `entity_instance` VALUES (1,1,'1cc706b7-cb49-4dc5-9e76-e65cb67e872f','2020-04-28 00:00:00','2020-05-04 16:16:26',NULL),(15,1,'1cc706b7-cb49-4dc5-9e76-e65cb67e872d','2020-04-29 16:16:10','2020-04-30 10:31:03',NULL),(16,19,'989ea43b-8dfe-48e1-a889-80cd10baad2f','2020-05-20 16:41:18','2020-05-20 16:41:18',NULL),(17,19,'36ea0afd-3ae0-4b82-8be1-4d379cdc79e1','2020-06-04 14:40:50','2020-06-04 14:40:50',NULL),(18,19,'cda61fe2-80ed-481b-b5c6-9fae695a3b45','2020-06-04 14:41:04','2020-06-04 14:41:04',NULL),(19,19,'c98a4139-ff8f-49f6-a1fa-a533e05cf902','2020-06-04 14:41:18','2020-06-04 14:41:18',NULL),(20,19,'7680d97b-9c59-43d3-b8ac-e90c4fc4286e','2020-06-04 14:41:33','2020-06-04 14:41:33',NULL),(21,19,'2e922d5d-3dfc-4626-a3a3-275a039a0e63','2020-06-04 14:41:46','2020-06-04 14:41:46',NULL),(22,19,'6a701473-57f6-4d32-825d-282be7cfccdd','2020-06-04 14:42:09','2020-06-04 14:42:09',NULL),(23,19,'2290dbc4-ab6e-4fcc-b922-6f1d5d0ed137','2020-06-04 14:42:27','2020-06-04 14:42:27',NULL),(24,19,'ff9f3d42-9037-4a33-b686-869d115f0007','2020-06-04 14:42:46','2020-06-04 14:42:46',NULL),(25,19,'bdad9d0a-89c7-485b-bcb0-98851620738f','2020-06-04 14:43:18','2020-06-04 14:43:18',NULL),(26,19,'6e0d5d91-dcf2-40d4-addd-6e9423d6a00e','2020-06-04 14:43:34','2020-06-04 14:43:34',NULL);
+/*!40000 ALTER TABLE `entity_instance` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-06-04 16:46:54

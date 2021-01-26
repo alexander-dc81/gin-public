@@ -1,0 +1,46 @@
+{{if .results}}
+<div class="ibox">
+  <div class="ibox-head">
+    <div class="ibox-title">Data Table</div>
+  </div>
+  <div class="ibox-body">
+    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          {{range .entity.Nodes}}
+          <th>{{.Name}}</th>
+          {{end}}
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          {{range .entity.Nodes}}
+          <th>{{.Name}}</th>
+          {{end}}
+          <th>Actions</th>
+        </tr>
+      </tfoot>
+      <tbody>
+        {{range .results}}
+        <tr>
+            {{ with (index .Fields "NodeInstances.Value") }}
+            {{range .}}
+              <td>{{.}}</td>
+              {{end}}
+            {{end}}
+          <td>
+            <a href="{{url "Instance.Edit" .ID $.ID}}">
+              <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
+            </a>
+            <a href="{{url "Instance.Delete" .ID}}">
+              <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
+            </a>
+          </td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{end}}

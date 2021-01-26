@@ -1,0 +1,103 @@
+{{set . "title" "Entity - Relations"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        {{template "side_menu.html" .}}
+        <div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+            <div class="page-heading">
+                <h1 class="page-title">Entity Relations</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html"><i class="la la-home font-20"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Relations List</li>
+                </ol>
+            </div>
+            <div class="page-content fade-in-up">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title"></div>
+                                <div class="ibox-tools">
+                                    <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#relationsModal">Add Relation</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ibox-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Child Entity Name</th>
+                                                <th>Child Entity Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{if .relations}}
+                                            <input type="hidden" value="{{.ID}}" id="entityID" name="entityID">
+                                            {{range .relations}}
+                                            <tr>
+                                                <td>{{.ChildEntity.Name}}</td>
+                                                <td>{{.ChildEntity.Description}}</td>
+                                                <td>
+                                                    <a href="{{url "Relation.Delete" .ID $.ID}}">
+                                                        <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete" ><i class="fa fa-trash font-14"></i></button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {{end}}
+                                            {{end}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="relationsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  ciao
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Relation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{url "Relation.Add" .ID}}" method="POST">
+                <div class="row">
+                    <div class="col-sm-6 form-group" class="form-control">
+                        <label>Child Entity</label>
+                        <select name="relation.ChildEntityID" id="relation.ChildEntityID" class="form-control">            
+                            {{range $e := .entities}}
+                              <option value="{{$e.ID}}">{{$e.Name}}</option>                                       
+                            {{end}}   
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{template "footer.html" .}}

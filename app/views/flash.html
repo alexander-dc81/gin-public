@@ -1,0 +1,20 @@
+{{if .flash.success}}
+<h5> </h5>
+<div class="alert alert-success alert-bordered">
+	{{.flash.success}}
+</div>
+{{end}}
+
+{{if or .errors .flash.error}}
+<div class="alert alert-danger alert-bordered">
+	<h5> </h5>
+	{{if .flash.error}}
+		{{.flash.error}}
+	{{end}}
+	<ul style="margin-top:10px;">
+		{{range .errors}}
+			<li>{{.}}</li>
+		{{end}}
+	</ul>
+</div>
+{{end}}

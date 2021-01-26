@@ -1,0 +1,63 @@
+CREATE DATABASE  IF NOT EXISTS `gin` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin */;
+USE `gin`;
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+--
+-- Host: localhost    Database: gin
+-- ------------------------------------------------------
+-- Server version	8.0.15
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `node_instance`
+--
+
+DROP TABLE IF EXISTS `node_instance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `node_instance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `node_id` int(11) NOT NULL,
+  `value` longtext COLLATE utf8mb4_bin,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `entity_instance_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`) /*!80000 INVISIBLE */,
+  KEY `node_instance_node_idx` (`node_id`),
+  KEY `node_instance_entity_instance_idx` (`entity_instance_id`),
+  CONSTRAINT `node_instance_entity_instance` FOREIGN KEY (`entity_instance_id`) REFERENCES `entity_instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `node_instance_node` FOREIGN KEY (`node_id`) REFERENCES `node` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `node_instance`
+--
+
+LOCK TABLES `node_instance` WRITE;
+/*!40000 ALTER TABLE `node_instance` DISABLE KEYS */;
+INSERT INTO `node_instance` VALUES (1,1,'NODE VALUE','2020-04-28 00:00:00','2020-05-04 16:16:26',NULL,1),(2,4,'NODE VALUE 2','2020-04-28 00:00:00','2020-05-04 16:16:26',NULL,1),(3,48,'NODE VALUE 5','2020-04-28 00:00:00','2020-05-04 16:16:26',NULL,1),(8,1,'abc55521245f','2020-04-29 16:16:10','2020-04-30 10:31:03',NULL,15),(9,48,'def5552125f','2020-04-29 16:16:10','2020-04-30 10:31:03',NULL,15),(10,49,'ghi55521245f','2020-04-29 16:16:10','2020-04-30 10:31:03',NULL,15),(11,50,'15/04/2020 10:25','2020-04-29 16:16:10','2020-04-30 10:31:03',NULL,15),(12,49,'NODE VALUE 3','2020-05-04 16:08:40','2020-05-04 16:16:26',NULL,1),(13,50,'05/05/2020 18:08','2020-05-04 16:08:40','2020-05-04 16:16:26',NULL,1),(14,51,'company 1','2020-05-20 16:41:18','2020-05-20 16:41:18',NULL,16),(15,52,'roma','2020-05-20 16:41:18','2020-05-20 16:41:18',NULL,16),(16,51,'company due','2020-06-04 14:40:50','2020-06-04 14:40:50',NULL,17),(17,52,'milano','2020-06-04 14:40:50','2020-06-04 14:40:50',NULL,17),(18,51,'company tre','2020-06-04 14:41:04','2020-06-04 14:41:04',NULL,18),(19,52,'bologna','2020-06-04 14:41:04','2020-06-04 14:41:04',NULL,18),(20,51,'company quattro','2020-06-04 14:41:18','2020-06-04 14:41:18',NULL,19),(21,52,'napoli','2020-06-04 14:41:18','2020-06-04 14:41:18',NULL,19),(22,51,'company cinque','2020-06-04 14:41:33','2020-06-04 14:41:33',NULL,20),(23,52,'salerno','2020-06-04 14:41:33','2020-06-04 14:41:33',NULL,20),(24,51,'company sei','2020-06-04 14:41:46','2020-06-04 14:41:46',NULL,21),(25,52,'lecce','2020-06-04 14:41:46','2020-06-04 14:41:46',NULL,21),(26,51,'company sette','2020-06-04 14:42:09','2020-06-04 14:42:09',NULL,22),(27,52,'bari','2020-06-04 14:42:09','2020-06-04 14:42:09',NULL,22),(28,51,'company otto','2020-06-04 14:42:27','2020-06-04 14:42:27',NULL,23),(29,52,'pescara','2020-06-04 14:42:27','2020-06-04 14:42:27',NULL,23),(30,51,'company nove','2020-06-04 14:42:46','2020-06-04 14:42:46',NULL,24),(31,52,'venezia','2020-06-04 14:42:46','2020-06-04 14:42:46',NULL,24),(32,51,'company dieci','2020-06-04 14:43:18','2020-06-04 14:43:18',NULL,25),(33,52,'torino','2020-06-04 14:43:18','2020-06-04 14:43:18',NULL,25),(34,51,'company undici','2020-06-04 14:43:34','2020-06-04 14:43:34',NULL,26),(35,52,'aosta','2020-06-04 14:43:34','2020-06-04 14:43:34',NULL,26),(36,4,'dsdasad','2020-06-04 14:43:34','2020-06-04 14:43:34',NULL,15);
+/*!40000 ALTER TABLE `node_instance` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-06-04 16:46:56

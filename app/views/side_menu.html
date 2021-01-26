@@ -1,0 +1,11 @@
+<!-- START SIDEBAR ADMIN-->
+{{if eq (session "fulluser" .).Role.Description "Administrator"}}
+    {{template "side_menu_admin.html" .}}
+{{end}}
+<!-- END SIDEBAR ADMIN-->
+
+<!-- START SIDEBAR USER-->
+{{if eq (session "fulluser" .).Role.Description "User"}}
+    {{template "side_menu_user.html" .}}
+{{end}}
+<!-- END SIDEBAR USER-->

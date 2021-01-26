@@ -1,0 +1,35 @@
+{{set . "title" "Entity - Index"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        {{template "side_menu.html" .}}
+        <div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+            <div class="page-heading">
+                <h1 class="page-title">Entities List</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html"><i class="la la-home font-20"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Entities List</li>
+                </ol>
+            </div>
+            <div class="page-content fade-in-up">
+                {{template "Entity/list.html" .}}
+
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example-table').DataTable({
+                searching: false,
+                ordering:  false,
+                lengthChange: false
+            });
+        })
+    </script>
+{{template "footer.html" .}}

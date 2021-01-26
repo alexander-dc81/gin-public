@@ -1,0 +1,42 @@
+{{set . "title" "Entity - Search"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        {{template "side_menu.html" .}}
+        <div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+            <div class="page-heading">
+                <h1 class="page-title">Search Entities</h1>
+            </div>
+            <div class="page-content fade-in-up">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Search Keywords</div>
+                    </div>
+                    <div class="ibox-body">
+                        <form class="form-inline" method="POST" action="{{url "Entity.Search" }}">
+                            <label class="sr-only" for="ex-email">Keyword</label>
+                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="ex-email" type="text" placeholder="Keyword" id="searchText" name="searchText">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+
+                {{template "Entity/search_results.html" .}}
+
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example-table').DataTable({
+                searching: false,
+                ordering:  false,
+                lengthChange: false
+            });
+        })
+    </script>
+{{template "footer.html" .}}

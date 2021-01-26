@@ -1,0 +1,51 @@
+{{set . "title" "Entity - Details"}}
+{{template "header.html" .}}
+{{template "header_menu.html" .}}
+
+
+<body class="fixed-navbar">
+    <div class="page-wrapper">
+        {{template "side_menu.html" .}}
+        {{with .entity}}
+            <div class="content-wrapper">
+                <!-- START PAGE CONTENT-->
+                <div class="page-heading">
+                    <h1 class="page-title">{{.Name}}</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html"><i class="la la-home font-20"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">Entity Details</li>
+                    </ol>
+                </div>
+                <div class="page-content fade-in-up">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ibox ibox-warning">
+                                <div class="ibox-head">
+                                    <div class="ibox-title">Description</div>
+                                    <div class="ibox-tools">
+                                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(41px, 20px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                            <a class="dropdown-item">Edit</a>
+                                            <a class="dropdown-item">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ibox-body">{{.Description}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {{end}}
+        <!-- END PAGE CONTENT-->
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example-table').DataTable();
+        })
+    </script>
+{{template "footer.html" .}}
